@@ -21,3 +21,5 @@ export function parseIneligibility(reasons, quantity = 0) {
     }
     return reason;
 }
+
+export default parseIneligibility
