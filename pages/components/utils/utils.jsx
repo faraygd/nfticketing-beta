@@ -1,5 +1,4 @@
 import { ClaimEligibility } from "@thirdweb-dev/sdk";
-import React from "react";
 export function parseIneligibility(reasons, quantity = 0) {
     if (!reasons.length) {
         return "";
