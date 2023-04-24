@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useState } from "react";
-import { useActiveChain, useSwitchChain } from "@thirdweb-dev/react";
+import { useActiveChain} from "@thirdweb-dev/react";
 import { Goerli } from "@thirdweb-dev/chains";
 import Link from "next/link";
+
 const Navbar = () => {
-  const switchChain = useSwitchChain();
   const chain = useActiveChain();
   const [close, setClose] = useState(false);
   return (
@@ -23,10 +23,7 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="bg-orange-500 text-white text-center text-sm">
-            Connected to an unsupported network, please switch to{" "}
-            <button onClick={() => switchChain(Goerli.chainId)} className="bg-black">
-              Switch to Mumbai
-            </button>
+            Connected to an unsupported network, please switch to Mumbai
           </div>
         )}
       </div>

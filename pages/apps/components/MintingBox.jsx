@@ -12,9 +12,29 @@ import {
 import { toast } from "react-toastify";
 import { BigNumber, utils } from "ethers";
 import { useEffect, useMemo, useState } from "react";
-import { parseIneligibility } from "../../components/utils/utils";
 import ReactLoading from "react-loading";
-import { ContractMetadata } from "@thirdweb-dev/sdk";
+import { ContractMetadata, ClaimEligibility } from "@thirdweb-dev/sdk";
+function parseIneligibility(reasons, quantity = 0) {
+    if (!reasons.length) {
+        return "";
+    }
+    const reason = reasons[0];
+    if (reason === ClaimEligibility.Unknown ||
+        reason === ClaimEligibility.NoActiveClaimPhase ||
+        reason === ClaimEligibility.NoClaimConditionSet) {
+        return "This drop is not ready to be minted.";
+    }
+    else if (reason === ClaimEligibility.NotEnoughTokens) {
+        return "You don't have enough currency to mint.";
+    }
+    else if (reason === ClaimEligibility.AddressNotAllowed) {
+        if (quantity > 1) {
+            return `You are not eligible to mint ${quantity} tokens.`;
+        }
+        return "You are not eligible to mint at this time.";
+    }
+    return reason;
+}
 
 const MintingBox = ({ spinningBubbles, white }) => {
   const address = useAddress();
