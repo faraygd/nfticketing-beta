@@ -9,16 +9,11 @@ const About = () => {
             Who Are We
           </h1>
           <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-            We are a story-driven humor-based fun-loving collection of wonderful
-            and witty art meticulously hand-drawn by our artists. Our unique
-            collection of dozens of story characters serves as the basis of our
-            AI-generated art pieces that comprise the 7,777 Genesis NFTs
-            collection. Each Galaxy Peeps NFT will grant holders full
-            intellectual property (IP) rights over their NFTs, exclusive club
-            membership, IRL events, the creator NFT marketplace, airdrops,
-            upcoming projects, a token into our ecosystem, and more. The
-            collection is designed with a long-term growth-oriented vision for
-            the Metaverse world. We are
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Nunc
+            scelerisque viverra mauris in. Vitae ultricies leo integer malesuada
+            nunc. Congue eu consequat ac felis donec et odio pellentesque. Proin
+            sagittis nisl rhoncus mattis rhoncus urna.
           </p>
         </div>
       </div>
