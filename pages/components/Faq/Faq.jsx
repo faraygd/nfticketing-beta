@@ -3,12 +3,15 @@ import FaqList from "./FaqList";
 
 const Faq = () => {
   return (
-    <div className="md:py-12 lg:px-20 md:px-6 py-9 px-4 ml-4">
-      <h2 className="font-semibold dark:text-white lg:text-4xl text-3xl lg:leading-9 md:leading-7 leading-9 text-gray-800">
+    <section className="section-benefit my-36">
+      <div className="flex max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+        <h1 className="font-extrabold max-w-2xl text-4xl tracking-tight leading-none xl:text-6xl md:text-5xl dark:text-white">
         Frequently Asked Questions
-      </h2>
-      <FaqList/>
-    </div>
+        </h1>
+        <FaqList/>
+      </div>
+    </section>
+
   );
 };
 

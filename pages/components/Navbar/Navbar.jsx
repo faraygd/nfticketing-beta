@@ -5,9 +5,9 @@ const Navbar = () => {
   const [nav, setNav] = useState(false);
   return (
     <>
-      <div className="max-w-[1640px] mx-auto flex justify-between items-center p-6 bg-black w-10/12">
+      <div className="max-w-[2520px] flex justify-between items-center p-6 bg-black w-10/12 lg:mx-auto md:justify-between sm:justify-between">
         <div className="flex items-center">
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl px-2 text-white">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl text-white">
             {/* Logo */}
             <Link href="/">
               Cherry <span className="font-bold text-white">Labs</span>
@@ -30,7 +30,7 @@ const Navbar = () => {
         </div>
         {/* Mobile Menu */}
         {/* Menu */}
-        <div className="hidden md:flex text-white lg:hidden">
+        <div className="hidden md:flex text-white lg:hidden sm:flex ml-30">
           <AiOutlineMenu onClick={() => setNav(!nav)} size={18} />
         </div>
         {/* Overlay */}

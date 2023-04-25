@@ -19,7 +19,7 @@ const Hero = () => {
             Launch Apps
           </Link>
         </div>
-        <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
+        <div className="hidden lg:mt-0 lg:col-span-5 lg:flex md:flex w-[500px] ml-4 mt-20">
           <div className="border border-outline w-8/12">
             <img src="https://gateway.ipfscdn.io/ipfs/QmUmSPFBQiYfNKFMRLUySaEiT3ym7TR82r8fx8CDKHVBP8/4.jpg" />
           </div>
