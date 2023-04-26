@@ -217,7 +217,7 @@ const MintingBox = ({ spinningBubbles, white }) => {
     quantity,
   ]);
   return (
-    <div class="w-[250px] -mt-[144px] h-[400px]">
+    <div className="w-[250px] -mt-[144px] h-[400px]">
       <div className="">
         {isLoading ? (
           <div className="m-4 text-center items-center justify-center">
@@ -229,7 +229,7 @@ const MintingBox = ({ spinningBubbles, white }) => {
             />
           </div>
         ) : (
-          <div className="border border-outline w-[250px] h-[400px]">
+          <div className="border border-outline w-[260px] h-[400px]">
             <img src="https://ipfs.thirdwebcdn.com/ipfs/QmZwK5DmU77X3J1w52oFAmumpHA6s29bnE9PQ2dxVYL27g/QmXzgHsrfAq4kqZfKjb8cwoyUyBw1gQ6rwK2VMkQtuQnjm.jpg" />
             <div className="text-center bg-black text-white">
               {claimedSupply ? (
