@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Head from "next/head";
 import About from "./components/About/About";
 import Benefit from "./components/Benefit/Benefit";
@@ -7,7 +9,11 @@ import Hero from "./components/Hero/Hero";
 import Navbar from "./components/Navbar/Navbar";
 import Faq from "./components/Faq/Faq";
 import Footer from "./components/Footer/Footer";
+import Aos from "aos";
 export default function Home() {
+  useEffect(() => {
+    Aos.init();
+  }, [])
   return (
     <>
       <Head>
@@ -20,9 +26,8 @@ export default function Home() {
         <Navbar />
         <Hero />
         <About/>
-        <Benefit />
-        <Partners />
-        <Faq />
+        <Benefit/>
+        <Partners/>
         <Footer/>
       </main>
     </>

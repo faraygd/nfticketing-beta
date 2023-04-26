@@ -1,36 +1,47 @@
 import { useState } from "react";
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
+import Logo from "../../../public/images/Logo.svg";
+import Image from "next/image";
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   return (
     <>
-      <div className="max-w-[2520px] flex justify-between items-center p-6 bg-black w-10/12 lg:mx-auto md:justify-between sm:justify-between">
+      <div className="w-full flex justify-between items-center p-6">
         <div className="flex items-center">
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl text-white">
+          <h1 className="text-2xl text-white lg:ml-32">
             {/* Logo */}
-            <Link href="/">
-              Cherry <span className="font-bold text-white">Labs</span>
-            </Link>
+            <Image src={Logo} />
           </h1>
         </div>
         {/* Menu */}
         <div>
-          <ul className="hidden lg:flex gap-6 mr-6 ">
-            <li className="text-gray-400 cursor-pointer hover:text-white">
-              Home
-            </li>
-            <li className="text-gray-400 cursor-pointer hover:text-white">
-              Benefit
-            </li>
-            <li className="text-gray-400 cursor-pointer hover:text-white">
-              About
-            </li>
+          <ul className="hidden lg:flex gap-6 mr-24">
+            <Link href="/">
+              <li className="text-gray-400 cursor-pointer hover:text-white">
+                Home
+              </li>
+            </Link>
+            <Link href="#benefit">
+              <li className="text-gray-400 cursor-pointer hover:text-white">
+                Benefit
+              </li>
+            </Link>
+            <Link href="#partner">
+              <li className="text-gray-400 cursor-pointer hover:text-white">
+                Partner
+              </li>
+            </Link>
+            <Link href="#about">
+              <li className="text-gray-400 cursor-pointer hover:text-white">
+                About
+              </li>
+            </Link>
           </ul>
         </div>
         {/* Mobile Menu */}
         {/* Menu */}
-        <div className="hidden md:flex text-white lg:hidden sm:flex ml-30">
+        <div className="hidden md:flex text-white sm:flex ml-30  lg:hidden">
           <AiOutlineMenu onClick={() => setNav(!nav)} size={18} />
         </div>
         {/* Overlay */}
@@ -55,19 +66,30 @@ const Navbar = () => {
           />
           {/* Logo Side Drawer */}
           <h2 className="text-xl p-4 text-center flex">
-            Cherry <span className="font-bold">Labs</span>
+            Ticketing <span className="font-bold">LabsNFT</span>
           </h2>
           <nav>
             <ul className="flex flex-col text-center p-12 gap-y-12 ">
-              <li className="text-gray-800 cursor-pointer hover:text-semibold">
-                Home
-              </li>
-              <li className="text-gray-800 cursor-pointer hover:text-semibold">
-                Benefit
-              </li>
-              <li className="text-gray-800 cursor-pointer hover:text-semibold">
-                About
-              </li>
+              <Link href="/">
+                <li className="text-gray-800 cursor-pointer hover:text-semibold">
+                  Home
+                </li>
+              </Link>
+              <Link href="#benefit">
+                <li className="text-gray-800 cursor-pointer hover:text-semibold">
+                  Benefit
+                </li>
+              </Link>
+              <Link href="#partner">
+                <li className="text-gray-800 cursor-pointer hover:text-semibold">
+                  Partner
+                </li>
+              </Link>
+              <Link href="#about">
+                <li className="text-gray-800 cursor-pointer hover:text-semibold">
+                  About
+                </li>
+              </Link>
             </ul>
           </nav>
         </div>
