@@ -4,19 +4,20 @@ import React, { useState } from "react";
 import { useActiveChain } from "@thirdweb-dev/react";
 import { Goerli } from "@thirdweb-dev/chains";
 import Link from "next/link";
-
+import Logo from "../../../public/images/Logo.svg";
+import Image from "next/image";
 const Navbar = () => {
   const chain = useActiveChain();
   const [close, setClose] = useState(false);
   return (
     <>
-      {chain ? (
+      {!chain ? (
         <div className="bg-orange-500 text-white text-center text-sm">
-          Connected to {chain.name}
+          Not Connected
         </div>
       ) : (
         <div className="bg-orange-500 text-white text-center text-sm">
-          Connected to an unsupported network, please switch to Mumbai
+          Connected
         </div>
       )}
 
@@ -27,10 +28,7 @@ const Navbar = () => {
             <div className="flex flex-col">
               {/* <img src="/images/logo.png" alt="Logo"  width={100} className="bg-white"/> */}
               <Link href="apps" className="font-bold text-rose-500">
-                Catlabs
-                <p className="text-[10px] text-white">
-                  Powered by <span className="font-bold"> Cherry Labs</span>
-                </p>
+                <Image src={Logo}/>
               </Link>
             </div>
           </h1>

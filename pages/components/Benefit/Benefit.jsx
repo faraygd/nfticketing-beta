@@ -10,7 +10,7 @@ const Benefit = () => {
         </h1>
       </div>
       {/* Feature */}
-      <div className="flex justify-around">
+      <div className="flex justify-evenly">
         <Feature
           title="Chain Agnostic"
           img="https://www.seedling.cm/assets/icon-chain-agnostic.png"
