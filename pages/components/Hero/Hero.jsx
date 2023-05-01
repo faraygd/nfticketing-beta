@@ -1,16 +1,15 @@
+'use client'
+
 import Link from "next/link";
 import { useEffect } from "react";
 import AOS from "aos";
 const Hero = () => {
-  useEffect(() => {
-    AOS.init();
-  }, []);
   return (
     <section>
       <div className="flex max-w-screen-xl px-4 py-8 mx-auto my-12">
         <div className="mr-auto place-self-center">
           <h1
-            className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl ml-4 xl:text-6xl dark:text-white"
+            className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl ml-4 xl:text-6xl dark:text-white"
             data-aos="fade-up"
           >
             Bring
@@ -18,7 +17,7 @@ const Hero = () => {
             Your Experience Ticketing
             <br /> with Us
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-gray-100 lg:mb-8 md:text-lg ml-4 lg:text-xl dark:text-gray-400">
+          <p className="mb-6 font-light text-gray-100 lg:mb-8 md:text-lg ml-4 lg:text-xl dark:text-gray-400">
             Buy music tickets easily and quickly for you
             <br /> using cryptocurrency.
           </p>

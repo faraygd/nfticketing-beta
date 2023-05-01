@@ -9,7 +9,7 @@ const Partners = () => {
         </h1>
       </div>
       {/* Feature */}
-      <div className="flex flex-row justify-around">
+      <div className="flex flex-row justify-evenly">
         <PartnerDetails img="https://www.seedling.cm/assets/icon-chain-agnostic.png" />
         <PartnerDetails img="https://www.seedling.cm/assets/icon-chain-agnostic.png" />
         <PartnerDetails img="https://www.seedling.cm/assets/icon-chain-agnostic.png" />

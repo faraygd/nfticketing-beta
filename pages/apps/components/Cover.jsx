@@ -12,8 +12,8 @@ const Cover = (title, description) => {
         ></img>
       </div>
       {/* Profile */}
-      <div class="m-12">
-        <div className="justify-between md:flex flex-col md: gap-96 ">
+      <div class="hidden lg:flex m-12 justify-between sm:flex flex-co">
+        <div className="l">
           <ProfileImage />
           <MintingBox />
         </div>
