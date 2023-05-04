@@ -1,7 +1,4 @@
-'use client'
-
 import Link from "next/link";
-import { useEffect } from "react";
 import AOS from "aos";
 const Hero = () => {
   return (
@@ -9,7 +6,7 @@ const Hero = () => {
       <div className="flex max-w-screen-xl px-4 py-8 mx-auto my-12">
         <div className="mr-auto place-self-center">
           <h1
-            className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl ml-4 xl:text-6xl dark:text-white"
+            className="mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl ml-4 xl:text-6xl dark:text-white sm:text-4xl"
             data-aos="fade-up"
           >
             Bring
@@ -23,13 +20,13 @@ const Hero = () => {
           </p>
           <Link
             href="apps"
-            className="text-white border border-white p-4 font-bold md:ml-4 sm:ml-4 mt-6"
+            className="text-white border border-white p-4 font-bold md:ml-6 sm:ml-4 mt-6 "
           >
             Launch Apps
           </Link>
         </div>
         <div className="hidden lg:mt-0 lg:col-span-5 lg:flex md:flex w-[500px] ml-4 sm:flex ">
-          <div className="border border-outline w-8/12">
+          <div className="w-8/12">
             <img src="https://gateway.ipfscdn.io/ipfs/QmUmSPFBQiYfNKFMRLUySaEiT3ym7TR82r8fx8CDKHVBP8/4.jpg" />
           </div>
         </div>

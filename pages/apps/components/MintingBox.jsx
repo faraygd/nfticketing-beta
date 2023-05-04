@@ -1,4 +1,3 @@
-import React from "react";
 import {
   useContract,
   useTotalCirculatingSupply,
@@ -10,35 +9,15 @@ import {
   useAddress,
 } from "@thirdweb-dev/react";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { BigNumber, utils } from "ethers";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import ReactLoading from "react-loading";
-import { ContractMetadata, ClaimEligibility } from "@thirdweb-dev/sdk";
-function parseIneligibility(reasons, quantity = 0) {
-    if (!reasons.length) {
-        return "";
-    }
-    const reason = reasons[0];
-    if (reason === ClaimEligibility.Unknown ||
-        reason === ClaimEligibility.NoActiveClaimPhase ||
-        reason === ClaimEligibility.NoClaimConditionSet) {
-        return "This drop is not ready to be minted.";
-    }
-    else if (reason === ClaimEligibility.NotEnoughTokens) {
-        return "You don't have enough currency to mint.";
-    }
-    else if (reason === ClaimEligibility.AddressNotAllowed) {
-        if (quantity > 1) {
-            return `You are not eligible to mint ${quantity} tokens.`;
-        }
-        return "You are not eligible to mint at this time.";
-    }
-    return reason;
-}
+import { ClaimEligibility } from "@thirdweb-dev/sdk";
 
 const MintingBox = ({ spinningBubbles, white }) => {
   const address = useAddress();
-  const tokenId = 0;
+  const tokenId = 0; // Change to ID of NFT for Minting ( Thirdweb)
   const { contract: editionDrop } = useContract(
     "0xc0A426810ba6557919C53F61752870bBb08e9ee0",
     "edition-drop"
@@ -93,20 +72,6 @@ const MintingBox = ({ spinningBubbles, white }) => {
 
     if (perTransactionClaimable.lte(bnMaxClaimable)) {
       bnMaxClaimable = perTransactionClaimable;
-    }
-
-    const snapshotClaimable = claimerProofs.data?.maxClaimable;
-    if (snapshotClaimable) {
-      if (snapshotClaimable === "0") {
-        // allowed unlimited for the snapshot
-        bnMaxClaimable = BigNumber.from(1_000_000);
-      } else {
-        try {
-          bnMaxClaimable = BigNumber.from(snapshotClaimable);
-        } catch (e) {
-          // fall back to default case
-        }
-      }
     }
 
     let max;
@@ -218,117 +183,109 @@ const MintingBox = ({ spinningBubbles, white }) => {
   ]);
   return (
     <div className="w-[250px] -mt-[144px] h-[400px]">
-      <div className="">
-        {isLoading ? (
-          <div className="m-4 text-center items-center justify-center">
-            <ReactLoading
-              type={spinningBubbles}
-              color={white}
-              height={100}
-              width={100}
-            />
-          </div>
-        ) : (
-          <div className="border border-outline w-[260px] h-[400px]">
-            <img src="https://ipfs.thirdwebcdn.com/ipfs/QmZwK5DmU77X3J1w52oFAmumpHA6s29bnE9PQ2dxVYL27g/QmXzgHsrfAq4kqZfKjb8cwoyUyBw1gQ6rwK2VMkQtuQnjm.jpg" />
-            <div className="text-center bg-black text-white">
-              {claimedSupply ? (
-                <div className="text-center items-center py-4">
-                  <p>
-                    <b>{numberClaimed}</b>
-                    {" / "}
-                    {numberTotal || "∞"}
-                  </p>
+      {isLoading ? (
+        <div className="">
+          <ReactLoading
+            type={spinningBubbles}
+            color={white}
+            height={100}
+            width={100}
+            className="m-20"
+          />
+        </div>
+      ) : (
+        <div className="border border-outline w-[260px] h-[400px]">
+          <img src="https://ipfs.thirdwebcdn.com/ipfs/QmZwK5DmU77X3J1w52oFAmumpHA6s29bnE9PQ2dxVYL27g/QmXzgHsrfAq4kqZfKjb8cwoyUyBw1gQ6rwK2VMkQtuQnjm.jpg" />
+          <div className="text-center bg-black text-white">
+            {claimedSupply ? (
+              <div className="text-center items-center py-4">
+                <p>
+                  <b>{numberClaimed}</b>
+                  {" / "}
+                  {numberTotal || "∞"}
+                </p>
+              </div>
+            ) : (
+              <h2>Loading Supply</h2>
+            )}
+            {claimConditions.data?.length === 0 ||
+            claimConditions.data?.every(
+              (cc) => cc.maxClaimableSupply === "0"
+            ) ? (
+              <div>
+                <h2>
+                  This drop is not ready to be minted yet. (No claim condition
+                  set)
+                </h2>
+              </div>
+            ) : (
+              <>
+                <div className="flex flex-row items-center justify-center ml-4">
+                  <button
+                    className="cursor-pointer w-10 h-10 text-3xl bg-transparent text-white"
+                    onClick={() => setQuantity(quantity - 1)}
+                    disabled={quantity <= 1}
+                  >
+                    -
+                  </button>
+
+                  <h4>{quantity}</h4>
+
+                  <button
+                    className="cursor-pointer w-10 h-10 text-3xl bg-transparent ml-4"
+                    onClick={() => setQuantity(quantity + 1)}
+                    disabled={quantity >= maxClaimable}
+                  >
+                    +
+                  </button>
                 </div>
-              ) : (
-                <h2>Loading Supply</h2>
-              )}
-              {claimConditions.data?.length === 0 ||
-              claimConditions.data?.every(
-                (cc) => cc.maxClaimableSupply === "0"
-              ) ? (
-                <div>
-                  <h2>
-                    This drop is not ready to be minted yet. (No claim condition
-                    set)
-                  </h2>
+
+                <div className="flex flex-row items-center justify-center mt-6">
+                  {isSoldOut ? (
+                    <div className="mb-6">
+                      <Web3Button
+                        contractAddress={editionDrop?.getAddress() || ""}
+                        action={(cntr) => cntr.erc1155.claim(tokenId, quantity)}
+                        isDisabled={!canClaim || buttonLoading}
+                        onError={(err) => {
+                          toast.error("Ticket Purchase Process Error");
+                        }}
+                        onSuccess={() => {
+                          setQuantity(1);
+                          toast.success(
+                            "Ticket Purchase Process Successful, Check your transaction"
+                          );
+                        }}
+                      >
+                        {buttonLoading ? "Loading..." : buttonText}
+                      </Web3Button>
+                    </div>
+                  ) : (
+                    <div className="mb-6">
+                      <Web3Button
+                        contractAddress={editionDrop?.getAddress() || ""}
+                        action={(cntr) => cntr.erc1155.claim(tokenId, quantity)}
+                        isDisabled={!canClaim || buttonLoading}
+                        onError={(err) => {
+                          toast.error("Ticket Purchase Process Error");
+                        }}
+                        onSuccess={() => {
+                          setQuantity(1);
+                          toast.success(
+                            "Ticket Purchase Process Successful, Check your transaction"
+                          );
+                        }}
+                      >
+                        {buttonLoading ? "Loading..." : buttonText}
+                      </Web3Button>
+                    </div>
+                  )}
                 </div>
-              ) : (
-                <>
-                  <div className="flex flex-row items-center justify-center ml-4">
-                    <button
-                      className="cursor-pointer w-10 h-10 text-3xl bg-transparent text-white"
-                      onClick={() => setQuantity(quantity - 1)}
-                      disabled={quantity <= 1}
-                    >
-                      -
-                    </button>
-
-                    <h4>{quantity}</h4>
-
-                    <button
-                      className="cursor-pointer w-10 h-10 text-3xl bg-transparent ml-4"
-                      onClick={() => setQuantity(quantity + 1)}
-                      disabled={quantity >= maxClaimable}
-                    >
-                      +
-                    </button>
-                  </div>
-
-                  <div className="flex flex-row items-center justify-center mt-6">
-                    {isSoldOut ? (
-                      <div className="mb-6">
-                        <Web3Button
-                          contractAddress={editionDrop?.getAddress() || ""}
-                          action={(cntr) =>
-                            cntr.erc1155.claim(tokenId, quantity)
-                          }
-                          isDisabled={!canClaim || buttonLoading}
-                          onError={(err) => {
-                            toast.error("Ticket Purchase Process Error");
-                          }}
-                          onSuccess={() => {
-                            setQuantity(1);
-                            toast.success(
-                              "Ticket Purchase Process Successful, Check your transaction"
-                            );
-                          }}
-                        >
-                          {buttonLoading ? "Loading..." : buttonText}
-                        </Web3Button>
-                      </div>
-                    ) : (
-                      // <button className="border border-outline h-20 w-96 text-white z-100 font-bold uppercase">
-                      //   Sold Out
-                      // </button>
-                      <div className="mb-6">
-                        <Web3Button
-                          contractAddress={editionDrop?.getAddress() || ""}
-                          action={(cntr) =>
-                            cntr.erc1155.claim(tokenId, quantity)
-                          }
-                          isDisabled={!canClaim || buttonLoading}
-                          onError={(err) => {
-                            toast.error("Ticket Purchase Process Error");
-                          }}
-                          onSuccess={() => {
-                            setQuantity(1);
-                            toast.success(
-                              "Ticket Purchase Process Successful, Check your transaction"
-                            );
-                          }}
-                        >
-                          {buttonLoading ? "Loading..." : buttonText}
-                        </Web3Button>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-            </div>
+              </>
+            )}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 };

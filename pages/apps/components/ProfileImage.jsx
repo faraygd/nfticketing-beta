@@ -1,5 +1,6 @@
 import React from 'react'
-
+import { BsTwitter } from 'react-icons/bs'
+import Link from 'next/link'
 const ProfileImage = () => {
   return (
     <div className="max-w-[2520px] -mt-[144px] w-[260px] h-[250px] ">
@@ -8,6 +9,9 @@ const ProfileImage = () => {
         <h1 className='font-bold p-4 text-xl'>Musical Ticket</h1>
         <div className="description-project w-96 pl-4">
           Musical ticketing is live, 1000 Unique ticket for SGT Holder
+        </div>
+        <div className="flex ml-4 py-4">
+          <Link href="/"><BsTwitter/></Link>
         </div>
       </div>
     </div>

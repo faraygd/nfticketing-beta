@@ -9,7 +9,7 @@ const Navbar = () => {
     <>
       <div className="w-full flex justify-between items-center p-6">
         <div className="flex items-center">
-          <h1 className="text-2xl text-white lg:ml-32">
+          <h1 className="text-2xl text-white">
             {/* Logo */}
             <Image src={Logo} />
           </h1>
@@ -41,7 +41,7 @@ const Navbar = () => {
         </div>
         {/* Mobile Menu */}
         {/* Menu */}
-        <div className="hidden md:flex text-white sm:flex ml-30  lg:hidden">
+        <div className="hidden sm:flex ml-30  md:flex text-white ml-30  lg:hidden">
           <AiOutlineMenu onClick={() => setNav(!nav)} size={18} />
         </div>
         {/* Overlay */}
