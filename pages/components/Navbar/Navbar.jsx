@@ -71,7 +71,7 @@ const Navbar = () => {
           <nav>
             <ul className="flex flex-col text-center p-12 gap-y-12 ">
               <Link href="/">
-                <li className="text-gray-800 cursor-pointer hover:text-semibold">
+                <li className="text-gray-800 cursor-pointer hover:text-semibol">
                   Home
                 </li>
               </Link>
